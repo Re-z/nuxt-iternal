@@ -63,8 +63,8 @@ export default {
 			fetch(url)
 				.then(response => response.json())
 				.then(data => { this.allGalaxies = data })
-				.then(data => { this.filterGalaxiesByName() })
-				.then(data => { this.sortGalaxiesByName() })
+				.then(() => { this.filterGalaxiesByName() })
+				.then(() => { this.sortGalaxiesByName() })
 		},
 		filterGalaxiesByName() {
 			this.galaxiesInDOM = this.allGalaxies.filter(galaxy => {
@@ -76,18 +76,26 @@ export default {
 		sortGalaxiesByName() {
 			this.galaxiesInDOM.sort((a, b) => {
 				if(this.sortAZ) {
-	    			return b.name.localeCompare(a.name);
+					return b.name.localeCompare(a.name); 
 				} 
 				else {
 	    			return a.name.localeCompare(b.name);
 				}
-			  });
+			});
 			this.sortAZ = !this.sortAZ;
 		}
 	},
 	watch: {
 		search() {
 			this.filterGalaxiesByName();
+			this.galaxiesInDOM = this.galaxiesInDOM.sort((a, b) => {
+				if(!this.sortAZ) {
+					return b.name.localeCompare(a.name);
+				} 
+				else {
+					return a.name.localeCompare(b.name);
+				}
+			});
 		}
 	},
 	mounted() {

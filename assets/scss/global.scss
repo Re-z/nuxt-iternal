@@ -1,0 +1,267 @@
+@import '@/assets/scss/mixins.scss';
+@import '@/assets/scss/variables.scss';
+
+
+html {
+	scroll-behavior: smooth;
+}
+* {
+	box-sizing: border-box;
+	&::selection {
+		background: $lightblue;
+	}
+}
+body {
+	font-family: 'Roboto', sans-serif;
+	color: $black;
+}
+
+.has-sidebar {
+	padding-left: 270px;
+	@include responsive($tab) {
+		padding-left: 0;
+	}
+	&__left {
+		width: 270px;
+		position: fixed;
+		left: 0;
+		top: 0;
+		background: $lightblue;
+		height: 100vh;
+		z-index: 1;
+		@include responsive($tab) {
+			width: 100%;
+			position: static;
+			height: auto;
+		}
+	}
+	&__right {
+		width: 100%;
+		padding: 70px 60px;
+		@include responsive($desc) {
+			padding: 60px 40px;
+		}
+		@include responsive($tab) {
+			padding: 50px 30px;
+		}
+		@include responsive($mob) {
+			padding: 40px 20px;
+		}
+
+	}
+}
+.sidebar {
+	padding: 20px;
+}
+
+
+.page-title {
+	font-size: 34px;
+	font-weight: 500;
+}
+.heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 60px;
+	@include responsive($desc) {
+		margin-bottom: 40px;
+	}
+	&__left {
+		margin-right: 20px;
+		@include responsive($desc) {
+			width: 100%;
+			margin: 0 0 20px 0;
+		}
+	}
+	&__right {
+		width: 270px;
+		@include responsive($desc) {
+			width: 100%;
+		}
+	}
+	
+}
+.input-wrap {
+	position: relative;
+	&__input {
+		height: 36px;
+		line-height: 36px;
+		border: 1px solid $lightgray;
+		outline: none;
+		border-radius: 4px;
+		padding-right: 10px;
+		width: 100%;
+	}
+	&.has-icon-search {
+		&:before {
+			display: block;
+			content: '';
+			width: 16px;
+			height: 16px;
+			background: url('../img/search.svg') center center no-repeat;
+			position: absolute;
+			top: 11px;
+			left: 14px;
+		}
+		.input-wrap__input {
+			padding-left: 40px;
+		}
+	}
+}
+.galaxies {
+	&__heading {
+		display: flex;
+		@include responsive($desc) {
+			display: none;
+		}
+	}
+	&__heading-text {
+		font-size: 12px;
+		color: $gray;
+		text-transform: uppercase;
+		cursor: pointer;
+		letter-spacing: 1px;
+		&_bold {
+			font-weight: 900;
+			color: $black;
+			position: relative;
+			padding-right: 30px;
+			&:after {
+				content: '';
+				width: 10px;
+				height: 10px;
+				vertical-align: middle;
+				background: url('../img/arrow.svg') center center no-repeat;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				right: 10px;
+			}
+			&.sortedZA:after {
+				transform: translateY(-50%) rotate(180deg);
+			}
+		}
+	}
+	&__col {
+		padding: 15px 0;
+		&_name {
+			min-width: 270px;
+			width: 26%;
+			@include responsive($desc) {
+				width: 60%;
+				min-width: 150px;
+			}
+			@include responsive($mob) {
+				width: 100%;
+			}
+		}
+		&_constel {
+			min-width: 200px;
+			width: 19%;
+			@include responsive($desc) {
+				width: 40%;
+				min-width: 150px;
+			}
+			@include responsive($mob) {
+				width: 100%;
+			}
+		}
+		&_descr {
+			width: 55%;
+			@include responsive($desc) {
+				width: 100%;
+			}
+		}
+	}
+}
+.galaxy {
+	display: flex;
+	border: 1px solid $lightgray;
+	border-bottom: none;
+	@include responsive($desc) {
+		flex-wrap: wrap;
+		margin-bottom: 24px;
+	}
+	&:last-of-type {
+		border-bottom: 1px solid $lightgray;
+		@include responsive($desc) {
+			border-bottom: none;
+		}
+	}
+	&:hover {
+		background: rgba(97, 128, 239, 0.2);
+		@include responsive($mob) {
+			background: transparent;
+			& .galaxies__col_name {
+				background: rgba(97, 128, 239, 0.2);
+			}
+		}
+	}
+	& .galaxies__col {
+		padding: 15px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		@include responsive($mob) {
+			padding: 10px;
+		}
+	}
+	& .galaxies__col_name, .galaxies__col_constel {
+		border-right: 1px solid $lightgray; 
+		@include responsive($desc) {
+			border-bottom: 1px solid $lightgray;
+		}
+	}
+	& .galaxies__col_name {
+		@include responsive($mob) {
+			border-right: none;
+		}
+	}
+	& .galaxies__col_constel {
+		@include responsive($desc) {
+			border-right: none;
+		}
+	}
+	& .galaxies__col_descr {
+		@include responsive($desc) {
+			border-bottom: 1px solid $lightgray;
+		}
+	}
+	&__col-title {
+		display: none;
+		width: 100%;
+		font-size: 10px;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+		color: $gray;
+		letter-spacing: 1px;
+		&_dark {
+			color: $black;
+		}
+		@include responsive($desc) {
+			display: block;
+		}
+	}
+	&__figure {
+		padding-left: 50px;
+		position: relative;
+	}
+	&__img {
+		display: block;
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	&__img-descr, &__text {
+		font-size: 16px;
+		line-height: 24px;
+	}
+	&__text {
+		font-weight: 300;
+	}
+}
